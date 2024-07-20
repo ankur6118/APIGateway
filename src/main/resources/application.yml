@@ -1,0 +1,24 @@
+spring:
+  application:
+      name: "APIGateway"
+  cloud:
+    gateway:
+      routes:
+        - id: productservice
+          predicates:
+            - Path=/products/*
+          uri: lb://ProductService
+
+        - id: userservice
+          predicates:
+            - Path=/users/*
+          uri: lb://UserService
+eureka:
+ client:
+   registerWithEureka: true
+   fetchRegistry: true
+
+logging:
+  level:
+    org.springframework.cloud: trace
+
